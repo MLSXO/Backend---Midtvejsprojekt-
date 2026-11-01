@@ -27,6 +27,7 @@ app.get("/pokemons", (req, res) => {
     const sql = `
         SELECT *
         FROM pokemon
+        ORDER BY pokedex_number
     `;
 
     connection.query(sql, (error, results) => {
@@ -43,18 +44,94 @@ app.get("/pokemons", (req, res) => {
 });
 
 app.get("/pokemon-name", (req, res) => {
+    const name = typeof req.query.name === "string"
+        ? req.query.name.trim()
+        : "";
+
+    if (name === "") {
+        return res.status(400).json({
+            error: "Query parameter 'name' is required"
+        });
+    }
+
     const sql = `
-        SELECT name
+        SELECT *
         FROM pokemon
-        ORDER BY name
+        WHERE name LIKE ?
+        ORDER BY pokedex_number
     `;
 
-    connection.query(sql, (error, results) => {
+    connection.query(sql, [`%${name}%`], (error, results) => {
         if (error) {
             console.error(error);
 
             return res.status(500).json({
                 error: "Kunne ikke hente Pokémon-navne"
+            });
+        }
+
+        res.json(results);
+    });
+});
+
+app.get("/pokemon-type", (req, res) => {
+    const type = typeof req.query.type === "string"
+        ? req.query.type.trim()
+        : "";
+
+    if (type === "") {
+        return res.status(400).json({
+            error: "Query parameter 'type' is required"
+        });
+    }
+
+    const sql = `
+        SELECT *
+        FROM pokemon
+        WHERE primary_type = ? OR secondary_type = ?
+        ORDER BY pokedex_number
+    `;
+
+    connection.query(sql, [type, type], (error, results) => {
+        if (error) {
+            console.error(error);
+
+            return res.status(500).json({
+                error: "Kunne ikke hente Pokémon efter type"
+            });
+        }
+
+        res.json(results);
+    });
+});
+
+app.get("/pokemon-attack", (req, res) => {
+    const attack = Number(req.query.attack);
+
+    if (
+        req.query.attack === undefined ||
+        req.query.attack === "" ||
+        !Number.isFinite(attack) ||
+        attack < 0
+    ) {
+        return res.status(400).json({
+            error: "Query parameter 'attack' must be a non-negative number"
+        });
+    }
+
+    const sql = `
+        SELECT *
+        FROM pokemon
+        WHERE attack >= ?
+        ORDER BY attack DESC, pokedex_number
+    `;
+
+    connection.query(sql, [attack], (error, results) => {
+        if (error) {
+            console.error(error);
+
+            return res.status(500).json({
+                error: "Kunne ikke hente Pokémon efter attack"
             });
         }
 
