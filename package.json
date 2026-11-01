@@ -1,24 +1,29 @@
 {
-  "name": "tv-rfaglgt-midtvejsprojekt",
+  "name": "pokebase-backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "Express API for the Pokebase midterm project",
   "main": "main.js",
   "scripts": {
     "start": "node main.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node --check main.js && node --check trainers.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MLSXO/Tv-rfaglgt-midtvejsprojekt.git"
+    "url": "git+https://github.com/MLSXO/Backend---Midtvejsprojekt-.git"
   },
-  "keywords": [],
+  "keywords": [
+    "express",
+    "mysql",
+    "pokemon",
+    "rest-api"
+  ],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "bugs": {
-    "url": "https://github.com/MLSXO/Tv-rfaglgt-midtvejsprojekt/issues"
+    "url": "https://github.com/MLSXO/Backend---Midtvejsprojekt-/issues"
   },
-  "homepage": "https://github.com/MLSXO/Tv-rfaglgt-midtvejsprojekt#readme",
+  "homepage": "https://github.com/MLSXO/Backend---Midtvejsprojekt-#readme",
   "dependencies": {
     "cors": "^2.8.6",
     "dotenv": "^18.0.9",
