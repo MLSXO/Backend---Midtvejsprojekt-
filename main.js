@@ -3,6 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const mysql = require("mysql2");
 const cors = require("cors");
+const { createStatsRouter } = require("./stats");
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -16,7 +17,7 @@ const connection = mysql.createConnection({
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME
 });
-
+app.use("/stats", createStatsRouter(connection));
 app.get("/", (req, res) => {
     res.json({
         message: "API'et kører"
