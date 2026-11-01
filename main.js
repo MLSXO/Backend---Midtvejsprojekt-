@@ -86,6 +86,21 @@ app.get("/leagues", (req, res) => {
     });
 });
 
+const createTrainersRouter = require("./trainers");
+
+app.use("/trainers", createTrainersRouter(connection.promise()));
+
+app.use((error, req, res, next) => {
+
+    if (error.type === "entity.parse.failed") {
+        return res.status(400).json({
+            error: "Request body must be valid JSON"
+        });
+    }
+
+    next(error);
+});
+
 connection.connect((error) => {
     if (error) {
         console.error(
