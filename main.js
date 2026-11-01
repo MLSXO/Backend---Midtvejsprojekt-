@@ -26,10 +26,7 @@ app.get("/", (req, res) => {
 
 app.get("/pokemons", (req, res) => {
     const sql = `
-        SELECT *
-        FROM pokemon
-        ORDER BY pokedex_number
-    `;
+        SELECT * FROM pokemon ORDER BY pokedex_number`;
 
     connection.query(sql, (error, results) => {
         if (error) {
@@ -56,11 +53,7 @@ app.get("/pokemon-name", (req, res) => {
     }
 
     const sql = `
-        SELECT *
-        FROM pokemon
-        WHERE name LIKE ?
-        ORDER BY pokedex_number
-    `;
+        SELECT * FROM pokemon WHERE name LIKE ? ORDER BY pokedex_number`;
 
     connection.query(sql, [`%${name}%`], (error, results) => {
         if (error) {
@@ -87,11 +80,7 @@ app.get("/pokemon-type", (req, res) => {
     }
 
     const sql = `
-        SELECT *
-        FROM pokemon
-        WHERE primary_type = ? OR secondary_type = ?
-        ORDER BY pokedex_number
-    `;
+        SELECT * FROM pokemon WHERE primary_type = ? OR secondary_type = ? ORDER BY pokedex_number`;
 
     connection.query(sql, [type, type], (error, results) => {
         if (error) {
@@ -121,11 +110,7 @@ app.get("/pokemon-attack", (req, res) => {
     }
 
     const sql = `
-        SELECT *
-        FROM pokemon
-        WHERE attack >= ?
-        ORDER BY attack DESC, pokedex_number
-    `;
+        SELECT * FROM pokemon WHERE attack >= ? ORDER BY attack DESC, pokedex_number`;
 
     connection.query(sql, [attack], (error, results) => {
         if (error) {
@@ -142,15 +127,7 @@ app.get("/pokemon-attack", (req, res) => {
 
 app.get("/leagues", (req, res) => {
     const sql = `
-        SELECT
-            league_id,
-            league_name,
-            region,
-            challenge,
-            description
-        FROM league
-        ORDER BY league_name
-    `;
+        SELECT league_id,league_name, region, challenge, description FROM league ORDER BY league_name`;
 
     connection.query(sql, (error, results) => {
         if (error) {
