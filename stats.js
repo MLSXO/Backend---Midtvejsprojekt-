@@ -46,7 +46,6 @@ function createStatsRouter(connection) {
         connection.query(
             { sql: queries.types, timeout: 8000 },
             (error, results) => {
-                // Undgå at sende svaret mere end én gang.
                 if (res.headersSent) return;
 
                 if (error) {
@@ -57,7 +56,6 @@ function createStatsRouter(connection) {
                     });
                 }
 
-                // Sørg for, at antallet sendes som et tal.
                 for (const row of results) {
                     row.pokemon_count = Number(row.pokemon_count);
                 }
