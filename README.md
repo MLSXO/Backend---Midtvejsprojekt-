@@ -1,3 +1,6 @@
+#Screenshots 
+Link - https://docs.google.com/document/d/16kE5Hu5FAS7nfV2TgGm4l0a3A2DmsZcow7lh1YhFFAo/edit?usp=sharing
+
 # Pokébase – Backend
 
 Backend-API til vores midtvejsprojekt Pokébase. API’et er udviklet med Node.js og Express og kommunikerer med en MySQL-database med Pokémon, trainers, ligaer og kampe.
