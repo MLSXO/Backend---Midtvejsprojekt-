@@ -1,38 +1,28 @@
-#Screenshots 
-Link - https://docs.google.com/document/d/16kE5Hu5FAS7nfV2TgGm4l0a3A2DmsZcow7lh1YhFFAo/edit?usp=sharing
-
 # Pokébase – Backend
 
-Backend-API til vores midtvejsprojekt Pokébase. API’et er udviklet med Node.js og Express og kommunikerer med en MySQL-database med Pokémon, trainers, ligaer og kampe.
+Backend-API til midtvejsprojektet Pokébase. API'et er udviklet med Node.js og Express og kommunikerer med en MySQL-database med Pokémon, trainers, ligaer og kampe.
 
-Frontend-repository:  
-https://github.com/MLSXO/Frontend---Midtvejsprojekt-
+[Frontend-repository](https://github.com/MLSXO/Frontend---Midtvejsprojekt-)
 
 ## Teknologier
 
 - Node.js
 - Express
-- MySQL
-- mysql2
+- MySQL og mysql2
 - CORS
 - dotenv
 
 ## Installation
 
-Klon repositoryet:
+Klon repositoryet og installer dependencies:
 
 ```bash
 git clone https://github.com/MLSXO/Backend---Midtvejsprojekt-.git
 cd Backend---Midtvejsprojekt-
-```
-
-Installer dependencies:
-
-```bash
 npm install
 ```
 
-Opret en `.env`-fil ud fra `.env.example`:
+Opret en lokal `.env`-fil ud fra `.env.example`:
 
 ```env
 DB_HOST=localhost
@@ -46,38 +36,38 @@ Den rigtige `.env`-fil må ikke uploades til GitHub.
 
 ## Database
 
-Projektets databasefiler findes i mappen `Database`.
+Databasefilerne findes i mappen `Database`:
 
 - `league.sql` opretter tabellerne til ligaer og kampe.
 - `test-data.sql` indsætter testdata.
-- ER-diagrammet viser databasens tabeller og relationer.
+- `Database/ER-Diagram.png` viser tabeller og relationer.
 
-SQL-filerne forudsætter, at databasen `pokemon` og de grundlæggende Pokémon- og trainer-tabeller allerede er oprettet.
-
-Kør først det grundlæggende databasescript. Kør derefter:
+SQL-filerne forudsætter, at databasen `pokemon` og de grundlæggende Pokémon- og trainer-tabeller allerede er oprettet. Kør derefter filerne i denne rækkefølge:
 
 1. `Database/league.sql`
 2. `Database/test-data.sql`
 
 Filerne kan køres gennem MySQL Workbench eller MySQL-kommandolinjen.
 
-## Start API’et
+## Start API'et
 
 ```bash
 npm start
 ```
 
-Når serveren er startet, er API’et tilgængeligt på:
-
-```text
-http://localhost:3000
-```
+API'et er derefter tilgængeligt på `http://localhost:3000`.
 
 Terminalen bør vise:
 
 ```text
 Forbundet til databasen pokemon
 Serveren kører på http://localhost:3000
+```
+
+Syntakskontrollen kan køres med:
+
+```bash
+npm test
 ```
 
 ## API-endpoints
@@ -124,6 +114,14 @@ Eksempel på at tilføje en Pokémon:
 |---|---|---|
 | GET | `/leagues` | Henter alle ligaer |
 
+### Dashboard-statistik
+
+| Metode | Endpoint | Beskrivelse |
+|---|---|---|
+| GET | `/stats/types` | Henter antal Pokémon pr. type |
+| GET | `/stats/average-attack` | Henter gennemsnitlig attack pr. type |
+| GET | `/stats/trainers` | Henter antal Pokémon pr. trainer |
+
 ## Projektstruktur
 
 ```text
@@ -136,20 +134,19 @@ Backend---Midtvejsprojekt-/
 ├── .env.example
 ├── .gitignore
 ├── main.js
+├── stats.js
 ├── trainers.js
 ├── package.json
-└── package-lock.json
+├── package-lock.json
+└── README.md
 ```
 
-## Dokumentation
+## Dokumentation og screenshots
 
-ER-diagrammet findes i repositoryets `Database`-mappe.
+- [Backend-screenshots](https://docs.google.com/document/d/16kE5Hu5FAS7nfV2TgGm4l0a3A2DmsZcow7lh1YhFFAo/edit?usp=sharing)
+- [ER-diagram](Database/Database/ER-Diagram.png)
 
-Til den endelige aflevering tilføjes også:
-
-- Screenshots af den kørende hjemmeside
-- Screenshot af API-data
-- Link til demonstrationsvideo
+Screenshot-dokumentationen viser databaseforbindelsen, data i MySQL Workbench, API-resultatet og ER-diagrammet.
 
 ## Gruppemedlemmer
 
