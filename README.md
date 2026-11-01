@@ -1,8 +1,8 @@
-# Pokébase – Backend
+# Pokébase backend
 
-Backend-API til midtvejsprojektet Pokébase. API'et er udviklet med Node.js og Express og kommunikerer med en MySQL-database med Pokémon, trainers, ligaer og kampe.
+Dette er backend-delen af vores Pokébase-projekt. Den er lavet med Node.js og Express og henter data fra en MySQL-database.
 
-[Frontend-repository](https://github.com/MLSXO/Frontend---Midtvejsprojekt-)
+[Link til frontend](https://github.com/MLSXO/Frontend---Midtvejsprojekt-)
 
 ## Teknologier
 
@@ -12,9 +12,9 @@ Backend-API til midtvejsprojektet Pokébase. API'et er udviklet med Node.js og E
 - CORS
 - dotenv
 
-## Installation
+## Sådan starter du projektet
 
-Klon repositoryet og installer dependencies:
+Klon repositoryet og installer pakkerne:
 
 ```bash
 git clone https://github.com/MLSXO/Backend---Midtvejsprojekt-.git
@@ -22,7 +22,7 @@ cd Backend---Midtvejsprojekt-
 npm install
 ```
 
-Opret en lokal `.env`-fil ud fra `.env.example`:
+Lav en `.env`-fil med de samme felter som i `.env.example`:
 
 ```env
 DB_HOST=localhost
@@ -32,65 +32,45 @@ DB_NAME=pokemon
 PORT=3000
 ```
 
-Den rigtige `.env`-fil må ikke uploades til GitHub.
-
-## Database
-
-Databasefilerne findes i mappen `Database`:
-
-- `league.sql` opretter tabellerne til ligaer og kampe.
-- `test-data.sql` indsætter testdata.
-- `Database/ER-Diagram.png` viser tabeller og relationer.
-
-SQL-filerne forudsætter, at databasen `pokemon` og de grundlæggende Pokémon- og trainer-tabeller allerede er oprettet. Kør derefter filerne i denne rækkefølge:
-
-1. `Database/league.sql`
-2. `Database/test-data.sql`
-
-Filerne kan køres gennem MySQL Workbench eller MySQL-kommandolinjen.
-
-## Start API'et
+Start serveren med:
 
 ```bash
 npm start
 ```
 
-API'et er derefter tilgængeligt på `http://localhost:3000`.
+Serveren kører derefter på `http://localhost:3000`.
 
-Terminalen bør vise:
+## Database
 
-```text
-Forbundet til databasen pokemon
-Serveren kører på http://localhost:3000
-```
+SQL-filerne ligger i mappen `Database`.
 
-Syntakskontrollen kan køres med:
+- `league.sql` opretter tabellerne til ligaer og kampe.
+- `test-data.sql` indsætter testdata.
+- `Database/ER-Diagram.png` viser tabellerne og deres relationer.
 
-```bash
-npm test
-```
+Den grundlæggende Pokémon-database skal være oprettet først. Derefter køres `league.sql` og til sidst `test-data.sql`.
 
-## API-endpoints
+## Endpoints
 
 ### Pokémon
 
-| Metode | Endpoint | Beskrivelse |
+| Metode | Endpoint | Funktion |
 |---|---|---|
 | GET | `/pokemons` | Henter alle Pokémon |
-| GET | `/pokemon-name?name=pika` | Søger efter Pokémon-navn |
-| GET | `/pokemon-type?type=Fire` | Søger efter primær eller sekundær type |
-| GET | `/pokemon-attack?attack=80` | Henter Pokémon med mindst den valgte attack-værdi |
+| GET | `/pokemon-name?name=pika` | Søger efter navn |
+| GET | `/pokemon-type?type=Fire` | Søger efter type |
+| GET | `/pokemon-attack?attack=80` | Filtrerer efter minimum attack |
 
 ### Trainers
 
-| Metode | Endpoint | Beskrivelse |
+| Metode | Endpoint | Funktion |
 |---|---|---|
 | GET | `/trainers` | Henter alle trainers |
 | GET | `/trainers/:id/pokemons` | Henter en trainers Pokémon |
 | POST | `/trainers` | Opretter en trainer |
 | POST | `/trainers/:id/pokemons` | Tilføjer en Pokémon til en trainer |
 
-Eksempel på oprettelse af en trainer:
+Eksempel på en ny trainer:
 
 ```json
 {
@@ -108,47 +88,37 @@ Eksempel på at tilføje en Pokémon:
 }
 ```
 
-### Ligaer
+### Ligaer og statistik
 
-| Metode | Endpoint | Beskrivelse |
+| Metode | Endpoint | Funktion |
 |---|---|---|
-| GET | `/leagues` | Henter alle ligaer |
-
-### Dashboard-statistik
-
-| Metode | Endpoint | Beskrivelse |
-|---|---|---|
+| GET | `/leagues` | Henter ligaerne |
 | GET | `/stats/types` | Henter antal Pokémon pr. type |
 | GET | `/stats/average-attack` | Henter gennemsnitlig attack pr. type |
 | GET | `/stats/trainers` | Henter antal Pokémon pr. trainer |
 
-## Projektstruktur
+## Filer
 
 ```text
 Backend---Midtvejsprojekt-/
 ├── Database/
 │   ├── league.sql
 │   ├── test-data.sql
-│   └── Database/
-│       └── ER-Diagram.png
-├── .env.example
-├── .gitignore
+│   └── Database/ER-Diagram.png
 ├── main.js
 ├── stats.js
 ├── trainers.js
+├── .env.example
 ├── package.json
-├── package-lock.json
 └── README.md
 ```
 
-## Dokumentation og screenshots
+## Screenshots
 
-- [Backend-screenshots](https://docs.google.com/document/d/16kE5Hu5FAS7nfV2TgGm4l0a3A2DmsZcow7lh1YhFFAo/edit?usp=sharing)
+- [Screenshots af backend og database](https://docs.google.com/document/d/16kE5Hu5FAS7nfV2TgGm4l0a3A2DmsZcow7lh1YhFFAo/edit?usp=sharing)
 - [ER-diagram](Database/Database/ER-Diagram.png)
 
-Screenshot-dokumentationen viser databaseforbindelsen, data i MySQL Workbench, API-resultatet og ER-diagrammet.
-
-## Gruppemedlemmer
+## Gruppe
 
 - Marcus Larn Sperling
 - Emil Frost
